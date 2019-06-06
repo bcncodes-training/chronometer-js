@@ -9,6 +9,21 @@ let milDec      = document.getElementById('milDec');
 let milUni      = document.getElementById('milUni');
 let splits      = document.getElementById('splits');
 
+const inputHandler={
+    set: function(target,prop,newValue){
+        if (prop=='intervalId'){
+            target[prop]=newValue;
+            return true;
+        }
+        if(prop=='currentTime'){
+            target[prop]=newValue;
+            return true;
+        }
+        else false;
+    }
+}
+const miProxy=new Proxy(ch,inputHandler);
+
 
 function chronometer() {
 
@@ -32,6 +47,8 @@ function printSeconds() {
 }
 
 function printMilliseconds() {
+    milUni.innerText=ch.twoDigitsNumber(ch.setMilliseconds().toString()).substring(1,2);
+    milDec.innerText=ch.twoDigitsNumber(ch.setMilliseconds().toString()).substring(0,1);
 
 }
 
@@ -54,17 +71,18 @@ function setSplitBtn() {
 function setStartBtn() {
     if (btnLeft.innerText=='START'){
         btnLeft.innerText='STOP';
-        btnLeft.classList.add('btn', 'stop');
+        btnLeft.classList.add( 'stop');
         btnRight.innerText='SPLIT';
-        btnRight.classList.add('btn', 'split');       
-        ch.startClick();       
+        btnRight.classList.add('split');       
+        miProxy.startClick();  
     }
     else{
         btnLeft.innerText='START';
-        btnLeft.classList.add('btn', 'start');
+        btnLeft.classList.add( 'start');
+        btnLeft.classList.remove('stop');
         btnRight.innerText='RESET';
-        btnRight.classList.add('btn', 'reset');
-        ch.stopClick();
+        btnRight.classList.add( 'reset');
+        miProxy.stopClick();
     }
 }
 
