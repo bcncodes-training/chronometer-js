@@ -11,6 +11,7 @@
     this.intervalId = setInterval(() => {
         this.currentTime++;
         this.setTime();
+        printTime(this.minutes, this.seconds);
     }, 1000);
 
  }

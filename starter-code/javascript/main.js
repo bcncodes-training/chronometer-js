@@ -9,16 +9,22 @@ let milDec      = document.getElementById('milDec');
 let milUni      = document.getElementById('milUni');
 
 
-function printTime() {
+function printTime(minutes, seconds) {
+    if (minutes>0){
+        this.printMinutes(minutes);
+    }
+    this.printSeconds(seconds);
 
 }
 
-function printMinutes() {
-
+function printMinutes(minutes) {
+    minDec.innerHTML = minutes[0];
+    minUni.innerHTML = minutes[1];
 }
 
-function printSeconds() {
-
+function printSeconds(seconds) {
+    secDec.innerHTML = seconds[0];
+    secUni.innerHTML = seconds[1];
 }
 
 function printMilliseconds() {
@@ -34,18 +40,22 @@ function clearSplits() {
 }
 
 function setStopBtn() {
+    
 
 }
 
 function setSplitBtn() {
+    
 
 }
 
 function setStartBtn() {
+    
 
 }
 
 function setResetBtn() {
+   
 
 }
 
@@ -83,8 +93,12 @@ btnLeft.addEventListener('click', function (e) {
         
         
     } else {
+        let borrar = document.getElementById('splits');
+      // borrar.removeChild(borrar.lastChild);
+        borrar.innerHTML = "";
           
     }
-
-   
+    
 }); 
+
+
