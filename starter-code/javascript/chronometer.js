@@ -83,7 +83,8 @@ this.intervalId = setInterval(()=>{
     this.setTime();
     localStorage.setItem(this.setTime, this.currentTime);
     let x = localStorage.getItem(this.setTime);
-    console.log(x);
+    //console.log(x);
+    document.getElementById("splits").innerHTML = x;
     
  }
 }
