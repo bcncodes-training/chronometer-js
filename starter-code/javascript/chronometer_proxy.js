@@ -5,6 +5,7 @@ class Chronometer {
         this.contMili = 0;
     }
 
+    // Esta función retornará el intervalId.
     startClick() {
         this.intervalId = setInterval(() => {
             if(this.contMili==1000) {
@@ -36,7 +37,10 @@ class Chronometer {
         let minutes=this.twoDigitsNumber(this.setMinutes());
         let seconds=this.twoDigitsNumber(this.setSeconds());
         let miliseconds=this.setMilliseconds();
-        printTime(minutes,seconds,miliseconds);
+        // Para evitar el utilizar una llamada fuera del objeto, implementamos un proxy
+        // A través del proxy nos ocuparemos del cambio del cronometro
+        // El proxy está en main.js
+        // printTime(minutes,seconds,miliseconds);
     }
 
     setMilliseconds() {
@@ -50,9 +54,5 @@ class Chronometer {
     resetClick() {
         this.currentTime=0;
         this.contMili = 0;
-    }
-
-    splitClick() {
-
     }
 }
