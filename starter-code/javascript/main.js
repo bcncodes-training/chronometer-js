@@ -9,6 +9,7 @@ let milDec      = document.getElementById('milDec');
 let milUni      = document.getElementById('milUni');
 let splits      = document.getElementById('splits');
 
+//iniciem proxy per desvincular el chrono del codi de la pagina
 const inputHandler={
     set: function(target,prop,newValue){
         if (prop=='intervalId'){
@@ -17,6 +18,12 @@ const inputHandler={
         }
         if(prop=='currentTime'){
             target[prop]=newValue;
+            printTime();
+            return true;
+        }
+        if(prop=='currentTimeMil'){
+            target[prop]=newValue;
+            printMilliseconds();
             return true;
         }
         else false;
@@ -47,9 +54,8 @@ function printSeconds() {
 }
 
 function printMilliseconds() {
-    milUni.innerText=ch.twoDigitsNumber(ch.setMilliseconds().toString()).substring(1,2);
     milDec.innerText=ch.twoDigitsNumber(ch.setMilliseconds().toString()).substring(0,1);
-
+    milUni.innerText=ch.twoDigitsNumber(ch.setMilliseconds().toString()).substring(1,2);
 }
 
 function printSplit() {
@@ -65,7 +71,10 @@ function setStopBtn() {
 }
 
 function setSplitBtn() {
-
+    let split=document.createElement('li');
+    split.innerText=`${ch.twoDigitsNumber(ch.setMinutes())}:${ch.twoDigitsNumber(ch.setSeconds())}:${ch.twoDigitsNumber(ch.setMilliseconds())}`;
+    splits.appendChild(split);
+    saveStorage();
 }
 
 function setStartBtn() {
@@ -96,12 +105,16 @@ function setResetBtn() {
     else{
         btnRight.classList.add('split');
          //let split=new HTMLElement('li');
-        let split=document.createElement('li');
-        split.innerText=`${ch.twoDigitsNumber(ch.setMinutes())}:${ch.twoDigitsNumber(ch.setSeconds())}`;
-        splits.appendChild(split);
+         setSplitBtn();
+
+
 
     }
 
+}
+function saveStorage(){
+    console.log(splits.children.length);
+    //localStorage.set(`${splits.length}`);
 }
 
 // Start/Stop Button
