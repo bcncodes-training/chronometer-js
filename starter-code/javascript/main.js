@@ -32,6 +32,8 @@ function printMilliseconds() {
 }
 
 function printSplit() {
+   printMinutes();
+   printSeconds();
 
 }
 
