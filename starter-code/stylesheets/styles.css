@@ -8,10 +8,11 @@ body {
   font-size: 80px;
   font-weight: bold;
   padding: 40px 0;
+  background-color: whitesmoke;
 }
 
 #clock {
-  border: 2px solid #000;
+  border: 2px solid #333;
   border-radius: 20px;
   box-sizing: border-box;
   height: 250px;
@@ -21,7 +22,7 @@ body {
 }
 
 #sphere {
-  border: 2px solid #000;
+  border: 2px solid #333;
   border-radius: 20px;
   box-sizing: border-box;
   font-family: "Digi";

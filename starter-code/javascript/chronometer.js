@@ -1,20 +1,21 @@
  class Chronometer {
     constructor() {
-
+       
         //inicicializamos
         this.currentTime = 0;//0 minutes
         //this.intervalId = 1000;//este intervalId declarado
         this.intervalId = 0;
+        
 
 }
 
  startClick() {
 //this.interval = setInterval(()=>{this.currentTime+=1}, 1000);
-this.intervalId = setInterval(()=>{
+this.intervalId = setInterval( () =>{
     this.currentTime++;
     this.setTime();//llamada
    //console.log(this.minutes+':'+this.seconds);
-    printTime(this.minutes,this.seconds);
+    printTime(this.minutes, this.seconds, this.milliseconds);
 }, 1000);
     /*las function de flecha tienen el contexto ya establecido del padre
     si utilizamos function debemos utilizar bind(this)para decirle que su contexto es chronometre y no window */
@@ -23,24 +24,29 @@ this.intervalId = setInterval(()=>{
     //printTime(this.minutes, this.seconds);
  }
 
- setMinutes() {
+ //setMinutes() {
    /*  let minutes = Math.floor(this.currentTime/60);
      return minutes;*/
-     return Math.floor(this.currentTime/60);
- }
+   //  return Math.floor(this.currentTime/60);
+ //}
+ setMinutes = () => Math.floor(this.currentTime / 60);
 
- setSeconds() {
+ setSeconds = () => Math.floor(this.currentTime % 60);
+
+ setMilliseconds = () => Math.floor(this.currentTime / 1000);
+
+ //setSeconds() {
      /*let seconds = Math.floor(this.currentTime % 60);
      return seconds;*/
-     return Math.floor(this.currentTime%60);
- }
+    // return Math.floor(this.currentTime % 60);
+ //}
 
  twoDigitsNumber(number) {
      // seconds.value//son number
      //minutes.value
      let numero = number.toString();
      //let numero = '0'.concat(number.toString());//.slice(-2);//pk array?
-        if( numero.length <2){
+        if( numero.length < 2){
             numero = '0'.concat(number);//.toString());
         }
      return numero;
@@ -60,11 +66,10 @@ this.intervalId = setInterval(()=>{
 
     this.seconds = this.twoDigitsNumber(this.setSeconds());
 
- }
-
- setMilliseconds() {
+    this.milliseconds = this.twoDigitsNumber(this.setMilliseconds());
 
  }
+
 
  stopClick() {
     clearInterval(this.intervalId);
@@ -75,16 +80,22 @@ this.intervalId = setInterval(()=>{
 
     this.currentTime = 0;
     this.setTime();
-    printTime(this.minutes, this.seconds);
+    printTime(this.minutes, this.seconds, this.milliseconds);
  }
 
  splitClick() {//trabajar
     this.currentTime;
     this.setTime();
     localStorage.setItem(this.setTime, this.currentTime);
-    let x = localStorage.getItem(this.setTime);
+    let x = localStorage.getItem(this.setTime, this.currentTime);
+    
+    //imprimir el split sin que sume los segundos
+    if(x > 60 || x < 60){
+       x = this.minutes + " : " + this.seconds + " : " + this.milliseconds;
+    }
    // console.log(x);
     document.getElementById("splits").innerHTML = x;
+    let temp = document.createElement('tr');
     
  }
 }

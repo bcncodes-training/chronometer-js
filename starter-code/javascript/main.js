@@ -7,18 +7,20 @@ let secDec      = document.getElementById('secDec');
 let secUni      = document.getElementById('secUni');
 let milDec      = document.getElementById('milDec');
 let milUni      = document.getElementById('milUni');
+let splits      = document.getElementById('splits');
+let mSplits     = [];
 
 
-function printTime(minutes,seconds) {
-    if(minutes>0){
+function printTime(minutes, seconds, milliseconds) {
+    if(minutes > 0){
         this.printMinutes(minutes);
     }
-    this.printSeconds(seconds);
+    this.printSeconds(seconds) || this.printMilliseconds(milliseconds);
 }
 
 function printMinutes(minutes) {
     minDec.innerHTML = minutes [0];
-    milUni.innerHTML = minutes [1];
+    minUni.innerHTML = minutes [1];
 }
 
 function printSeconds(seconds) {
@@ -27,13 +29,14 @@ function printSeconds(seconds) {
     secUni.innerHTML = seconds[1];
 }
 
-function printMilliseconds() {
-
+function printMilliseconds(milliseconds) {
+    milDec.innerHTML = milliseconds[0];
+    milUni.innerHTML = milliseconds[1];
 }
-
 function printSplit() {
    printMinutes();
    printSeconds();
+   printMilliseconds();
 
 }
 
@@ -64,7 +67,11 @@ function setResetBtn() {
 }
 
 // Start/Stop Button
+
 btnLeft.addEventListener('click', function (e) {
+(btnLeft.className.indexOf('start') > 0) ? chronometer.startClick() || setStopBtn() || setSplitBtn() : chronometer.stopClick() || setStartBtn() || setResetBtn()
+}); 
+ /* btnLeft.addEventListener('click', function (e) {
 
 if(btnLeft.className.indexOf('start')>0){
     chronometer.startClick();
@@ -76,7 +83,7 @@ if(btnLeft.className.indexOf('start')>0){
     setStartBtn();
     setResetBtn();
     
-}
+} */
 
   /* e.currentTarget.classList.toggle('start');
    e.currentTarget.classList.toggle('stop');
@@ -90,10 +97,11 @@ if(btnLeft.className.indexOf('start')>0){
    e.currentTarget.innerHTML = 'RESET';*/
 
 
-});
+//}); 
+
 
 // Reset/Split Button
-btnRight.addEventListener('click', function (e) {
+/* btnRight.addEventListener('click', function (e) {
 
     if(btnRight.className.indexOf('split')>0){
         chronometer.splitClick();
@@ -106,4 +114,7 @@ btnRight.addEventListener('click', function (e) {
        // setResetBtn();
     }
    
-});
+}); */
+btnRight.addEventListener('click', function (e){
+    (btnRight.className.indexOf('split') >= 0) ? chronometer.splitClick() && setSplitBtn() : chronometer.resetClick();
+})
